@@ -1,5 +1,5 @@
 const router = require('koa-router')();
-const {getList,getListCount, getDetail, newBlog, updateBlog, delBlog} = require('../controller/blog');
+const {getList,getListCount,getClassify,getClassifyCount, getDetail, newBlog, updateBlog, delBlog} = require('../controller/blog');
 const {SuccessModel, ErrorModel} = require('../model/resModel');
 const loginCheck = require('../middleware/loginCheck');
 
@@ -34,6 +34,31 @@ router.get('/list/count', async function (ctx, next) {
 
     ctx.body = new SuccessModel(count);
 });
+
+
+
+router.get('/listClass', async function (ctx, next) {
+    const page = ctx.query.page || '';
+    const total = ctx.query.total || '';
+    const classify = ctx.query.classify || '';
+
+
+    const listData = await getClassify(classify,page,total);
+
+    ctx.body = new SuccessModel(listData);
+});
+
+router.get('/listClass/count', async function (ctx, next) {
+    const page = ctx.query.page || '';
+    const total = ctx.query.total || '';
+    const classify = ctx.query.classify || '';
+
+
+    const listData = await getClassifyCount(classify,page,total);
+
+    ctx.body = new SuccessModel(listData);
+});
+
 
 
 

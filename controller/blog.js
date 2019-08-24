@@ -12,24 +12,6 @@ const {exec} = require('../db/mysql');
  */
 const getList = async (author, keyword, classify, page, total) => {
 
-
-    // let sql = `select * from blogs where 1=1 `;
-    // if (author) {
-    //     sql += `and author='${author}' `
-    // }
-    // if (keyword) {
-    //     sql += `and title like '%${keyword}%' `
-    // }
-    // if (classify) {
-    //     sql += `and title like '%${classify}%' `
-    // }
-    // sql += `order by createtime desc `;
-    //
-    // if (page) {
-    //     sql += ` LIMIT ${page},${total};`
-    // }
-
-
     let sql = ` select * from blogs a ,classify b where 1=1 `;
 
     if (author) {
@@ -39,14 +21,11 @@ const getList = async (author, keyword, classify, page, total) => {
         sql += `and a.title like '%${keyword}%' `
     }
 
-    sql += `and a.classify =b.\`value\` order by a.createtime desc `;
+    sql += `and a.classify =b.value order by a.createtime desc `;
 
     if (page) {
         sql += ` LIMIT ${page},${total};`
     }
-
-
-
 
     return await exec(sql);
 };
@@ -70,6 +49,50 @@ const getListCount = async (author, keyword) => {
     }
 
 
+    return await exec(sql).then(row => {
+        return row[0];
+    })
+};
+
+
+/**
+ * 获取分类的详情
+ * @param classify
+ * @param page
+ * @param total
+ * @returns {Promise<unknown>}
+ */
+const getClassify = async (classify, page, total) => {
+
+    let sql = ` select * from blogs a,classify b where 1=1 `;
+
+
+    sql += `and a.classify=${classify} and a.classify =b.value  order by createtime desc `;
+
+    if (page) {
+        sql += ` LIMIT ${page},${total};`
+    }
+
+    return await exec(sql);
+};
+
+/**
+ * 获取分类的详情的总数
+ * @param classify
+ * @param page
+ * @param total
+ * @returns {Promise<unknown>}
+ */
+const getClassifyCount = async (classify, page, total) => {
+
+    let sql = ` select count(id) from blogs a , classify b where 1=1 `;
+
+
+    sql += `and a.classify=${classify} and a.classify =b.value  order by createtime desc `;
+
+    if (page) {
+        sql += ` LIMIT ${page},${total};`
+    }
 
     return await exec(sql).then(row => {
         return row[0];
@@ -109,8 +132,6 @@ const newBlog = async (blogData) => {
     let sql = ` insert into blogs (title,content,subtitle,createtime,author,classify) values('${title}',"${content}",'${subtitle}',${createTime},'${author}','${classify}');`;
 
 
-
-
     return await exec(sql).then(insertData => {
         return {
             id: insertData.insertId
@@ -148,6 +169,8 @@ const delBlog = async (id, author) => {
 module.exports = {
     getList,
     getListCount,
+    getClassify,
+    getClassifyCount,
     getDetail,
     newBlog,
     updateBlog,
