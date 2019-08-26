@@ -12,6 +12,7 @@
     "cross-env": "^5.2.0",
     "debug": "^4.1.1",
     "koa": "^2.7.0",
+    "koa-body": "^4.1.1",
     "koa-bodyparser": "^4.2.1",
     "koa-convert": "^1.2.0",
     "koa-cors": "0.0.16",

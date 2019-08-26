@@ -5,8 +5,20 @@ const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
+const koaBody = require('koa-body');
 const session = require('koa-generic-session');
 const redisStore = require('koa-redis');
+
+
+
+app.use(koaBody({
+    multipart: true,
+    formidable: {
+        maxFileSize: 200*1024*1024    // 设置上传文件大小最大限制，默认2M
+    }
+}));
+
+
 // 下面以koa2-cors为例，
 const cors = require('koa2-cors');
 
@@ -15,6 +27,7 @@ const cors = require('koa2-cors');
 const blog = require('./routes/blog')
 const user = require('./routes/user')
 const claccify = require('./routes/claccify')
+const uploadfiles = require('./routes/uploadfiles')
 
 const {REDIS_CONF} = require('./conf/db');
 
@@ -73,6 +86,7 @@ app.use(async (ctx, next) => {
 app.use(blog.routes(), blog.allowedMethods())
 app.use(user.routes(), user.allowedMethods())
 app.use(claccify.routes(), claccify.allowedMethods())
+app.use(uploadfiles.routes(), uploadfiles.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {
