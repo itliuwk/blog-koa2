@@ -26,6 +26,7 @@ const getList = async (author, keyword, classify, page, total) => {
     if (page) {
         sql += ` LIMIT ${page},${total};`
     }
+	console.log(sql)
 
     return await exec(sql);
 };

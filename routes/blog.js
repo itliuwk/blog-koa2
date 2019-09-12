@@ -17,8 +17,8 @@ router.get('/list', async function (ctx, next) {
         ctx.body = new ErrorModel('未登录');
         return false;
     }
-    author = username;
-    const listData = await getList(username, keyword,classify,page,total);
+    author = author || username;
+    const listData = await getList(author, keyword,classify,page,total);
 
     ctx.body = new SuccessModel(listData);
 });
@@ -29,8 +29,8 @@ router.get('/list/count', async function (ctx, next) {
     let username = ctx.query.username || '';
     const keyword = ctx.query.keyword || '';
 
-    author = username;
-    const count = await getListCount(username, keyword);
+    author = author || username;
+    const count = await getListCount(author, keyword);
 
     ctx.body = new SuccessModel(count);
 });
