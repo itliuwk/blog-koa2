@@ -1,5 +1,5 @@
 const router = require('koa-router')();
-const {getClassify,getClassifyLabel} = require('../controller/classify');
+const {getClassify,getClassifyLabel,getClassifyLen} = require('../controller/classify');
 const {SuccessModel, ErrorModel} = require('../model/resModel');
 const loginCheck = require('../middleware/loginCheck');
 
@@ -16,6 +16,12 @@ router.get('/list', async function (ctx, next) {
 router.get('/value', async function (ctx, next) {
     const value = ctx.query.value || '';
     const listData = await getClassifyLabel(value);
+    ctx.body = new SuccessModel(listData);
+});
+
+
+router.get('/length', async function (ctx, next) {
+    const listData = await getClassifyLen();
     ctx.body = new SuccessModel(listData);
 });
 

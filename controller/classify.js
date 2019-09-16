@@ -22,7 +22,18 @@ const getClassifyLabel = async (value) => {
 };
 
 
+/**
+ * 文章分类出现次数
+ */
+const getClassifyLen = async (value) => {
+    let sql = `SELECT a.label,a.value,sum(case when b.classify is not null then 1 else 0 end) as length from classify a left JOIN blogs b on a.value=b.classify GROUP BY a.value;
+`;
+    return await exec(sql);
+};
+
+
 module.exports = {
     getClassify,
-    getClassifyLabel
+    getClassifyLabel,
+	getClassifyLen
 };
