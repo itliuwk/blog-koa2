@@ -142,11 +142,11 @@ const newBlog = async (blogData) => {
 
 
 const updateBlog = async (id, blogData) => {
-    const {title, subtitle, content} = blogData;
+    const {title, subtitle, content,classify} = blogData;
 
-    let sql = ` update blogs set title='${title}', subtitle='${subtitle}', content='${content}' where id=${id}`;
+    let sql = ` update blogs set title='${title}', subtitle='${subtitle}', content='${content}' , classify='${classify}' where id=${id}`;
 
-
+console.log(sql)
     const updateData = await exec(sql);
 
     if (updateData.affectedRows > 0) {
