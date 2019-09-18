@@ -146,7 +146,6 @@ const updateBlog = async (id, blogData) => {
 
     let sql = ` update blogs set title='${title}', subtitle='${subtitle}', content='${content}' , classify='${classify}' where id=${id}`;
 
-console.log(sql)
     const updateData = await exec(sql);
 
     if (updateData.affectedRows > 0) {
