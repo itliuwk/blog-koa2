@@ -47,6 +47,7 @@ const getListCount = async (author, keyword) => {
 	if (author) {
 		sql += `and author='${author}' `
 	}
+
 	if (keyword) {
 		sql += `and title like '%${keyword}%' `
 	}
@@ -65,16 +66,20 @@ const getListCount = async (author, keyword) => {
  * @param total
  * @returns {Promise<unknown>}
  */
-const getClassify = async (classify, page, total) => {
+const getClassify = async (classify, keyword, page, total) => {
 
 	let sql = ` select * from blogs a,classify b where 1=1 `;
 
+	if (keyword) {
+		sql += `and a.title like '%${keyword}%' `
+	}
 
 	sql += `and a.classify=${classify} and a.classify =b.value  order by createtime desc `;
 
 	if (page) {
 		sql += ` LIMIT ${page},${total};`
 	}
+
 
 	return await exec(sql);
 };
@@ -86,16 +91,24 @@ const getClassify = async (classify, page, total) => {
  * @param total
  * @returns {Promise<unknown>}
  */
-const getClassifyCount = async (classify, page, total) => {
+const getClassifyCount = async (classify, keyword, page, total) => {
 
 	let sql = ` select count(id) from blogs a , classify b where 1=1 `;
-
+	
+	if (keyword) {
+		sql += `and a.title like '%${keyword}%' `
+	}
 
 	sql += `and a.classify=${classify} and a.classify =b.value  order by createtime desc `;
+
+
 
 	if (page) {
 		sql += ` LIMIT ${page},${total};`
 	}
+
+
+	console.log(sql)
 
 	return await exec(sql).then(row => {
 		return row[0];

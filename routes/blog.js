@@ -41,9 +41,9 @@ router.get('/listClass', async function (ctx, next) {
     const page = ctx.query.page || '';
     const total = ctx.query.total || '';
     const classify = ctx.query.classify || '';
+    const keyword = ctx.query.keyword || '';
 
-
-    const listData = await getClassify(classify,page,total);
+    const listData = await getClassify(classify,keyword,page,total);
 
     ctx.body = new SuccessModel(listData);
 });
@@ -51,10 +51,11 @@ router.get('/listClass', async function (ctx, next) {
 router.get('/listClass/count', async function (ctx, next) {
     const page = ctx.query.page || '';
     const total = ctx.query.total || '';
+    const keyword = ctx.query.keyword || '';
     const classify = ctx.query.classify || '';
 
 
-    const listData = await getClassifyCount(classify,page,total);
+    const listData = await getClassifyCount(classify,keyword,page,total);
 
     ctx.body = new SuccessModel(listData);
 });
