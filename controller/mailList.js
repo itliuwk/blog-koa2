@@ -22,12 +22,12 @@ const getMailList = async (call) => {
  */
 const addMailList = async (mailListData) => {
 	let {
-		moble,
+		mobile,
 		call,
 		describe,
 		createtime = Date.now()
 	} = mailListData;
-	let sql = "insert into mailList(moble,`call`,`describe`,createtime) values('"+moble+"','"+call+"','"+describe+"','"+createtime+"')"
+	let sql = "insert into mailList(mobile,`call`,`describe`,createtime) values('"+mobile+"','"+call+"','"+describe+"','"+createtime+"')"
 	return await exec(sql);
 };
 
@@ -37,10 +37,10 @@ const addMailList = async (mailListData) => {
  */
 const updateMailList = async (id, mailListData) => {
 	let {
-		moble,
+		mobile,
 		call
 	} = mailListData;
-	let sql = `update mailList set moble='${moble}' call='${call}' where id=${id} `
+	let sql = `update mailList set mobile='${mobile}' call='${call}' where id=${id} `
 
 	const updateData = await exec(sql);
 
