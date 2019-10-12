@@ -6,9 +6,9 @@ const {
 /**
  * 查找友链
  */
-const getFriends = async (title) => {
+const getFriends = async (name) => {
 	let sql = `select * from friends where 1=1 `;
-	if (title) {
+	if (name) {
 		sql += ` and name like '%${name}%' `
 	}
 	sql += ` order by createtime asc `;
