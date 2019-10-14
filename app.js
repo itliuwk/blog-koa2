@@ -31,6 +31,7 @@ const note = require('./routes/note')
 const whisper = require('./routes/whisper')
 const mailList = require('./routes/mailList')
 const friends = require('./routes/friends')
+const statistics = require('./routes/statistics')
 const uploadfiles = require('./routes/uploadfiles')
 
 const {REDIS_CONF} = require('./conf/db');
@@ -94,6 +95,7 @@ app.use(note.routes(), note.allowedMethods())
 app.use(whisper.routes(), whisper.allowedMethods())
 app.use(mailList.routes(), mailList.allowedMethods())
 app.use(friends.routes(), friends.allowedMethods())
+app.use(statistics.routes(), statistics.allowedMethods())
 app.use(uploadfiles.routes(), uploadfiles.allowedMethods())
 
 // error-handling
