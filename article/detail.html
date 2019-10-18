@@ -1,0 +1,189 @@
+<!--
+////////////////////////////////////////////////////////////////////
+//                                                                //
+//            版权所有：http://www.sxitw.cn                        //
+//            个人QQ：1834183435                                   //
+//                                                                //
+////////////////////////////////////////////////////////////////////
+ *　　　　　　　　┏┓　　　┏┓+ +
+ *　　　　　　　┏┛┻━━━┛┻┓ + +
+ *　　　　　　　┃　　　　　　　┃ 　
+ *　　　　　　　┃　　　━　　　┃ ++ + + +
+ *　　　　　　 ████━████+
+ *　　　　　　　┃　　　　　　　┃ +
+ *　　　　　　　┃　　　┻　　　┃
+ *　　　　　　　┃　　　　　　　┃ + +
+ *　　　　　　　┗━┓　　　┏━┛
+ *　　　　　　　　　┃　　　┃　　　　　　　　　　　
+ *　　　　　　　　　┃　　　┃ + + + +
+ *　　　　　　　　　┃　　　┃　　　　　　　
+ *　　　　　　　　　┃　　　┃ + 　　　　神兽镇楼,不宕机、无BUG　
+ *　　　　　　　　　┃　　　┃
+ *　　　　　　　　　┃　　　┃　　+　　　　　　　　　
+ *　　　　　　　　　┃　 　　┗━━━┓ + +
+ *　　　　　　　　　┃ 　　　　　　　┣┓
+ *　　　　　　　　　┃ 　　　　　　　┏┛
+ *　　　　　　　　　┗┓┓┏━┳┓┏┛ + + + +
+ *　　　　　　　　　　┃┫┫　┃┫┫
+ *　　　　　　　　　　┗┻┛　┗┻┛+ + + +
+--->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>{{title}} 刘伟坤 - 个人博客 | 随心IT | 刘伟坤IT | 刘伟坤博客 | 一个分享技术文章,热门资源的博客</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<meta name="description" content="刘伟坤 - 个人博客 随心it - 随心工具 - 一个分享技术文章,热门资源的博客,免费资源分享平台,站长工具,热门音乐免费下载,短网址生成,电影票房查询">
+		<meta name="keywords" content="刘伟坤 - 个人博客  刘伟坤,刘伟坤博客,随心,随心it,随心IT,随心工具,工具集合,suixin,suixinit,sxitw,sxitw.cn,www.sxitw.cn,随心it工具集合,随心IT工具集合,站长工具,热门音乐免费下载,短网址生成,电影票房查询">
+		<link rel="stylesheet" type="text/css" href="http://sxitw.cn/detail.css" />
+	</head>
+	<body>
+		<div class="blog-nav" onclick="toHome()">
+			返回首页
+		</div>
+		<div class="detail">
+			<section class="article-focusbox">
+				<header class="article-header">
+					<h1 class="article-title title">{{title}}</h1>
+					<div class="article-meta">
+						<span class="item item-1 createtime">{{createtime}}</span>
+						<span style="font-size: 14px;margin-left: 10px;">
+							<i class="iconfont icon-yanjing" style="vertical-align: middle;"></i>
+							阅读
+							<span id='count'>({{count}})</span>
+						</span>
+						<span class="item item-4">
+							分类：
+							<span style="cursor: pointer;color: #188AE2" label="{{label}}" value="{{value}}" onclick="toClassDetail()" id='label'>{{label}}</span>
+						</span>
+						<span class="item item-5"><a id="ae_bdcx" rel="external nofollow" target="_blank" href="" style="color: rgb(255, 0, 0);">提交收录</a></span>
+					</div>
+				</header>
+			</section>
+
+			<div class="content">
+				<div class="left">
+					<div class="content-c">
+						<p class="statement">特别声明：文章多为网络转载，资源使用一般不提供任何帮助，特殊资源除外，如有侵权请联系！</p>
+
+						<div id='content'>{{content}}</div>
+					</div>
+					<div class="content-b">
+						<h3>本文版权</h3>
+						<div>发布日期： <span class="createtime">{{createtime}}</span></div>
+						<div>
+							本文标题：
+							<span class="title">{{title}}</span>
+						</div>
+						<div>
+							本文链接：
+							<a href="" class="url"></a>
+						</div>
+						<div>
+							版权声明：文章为《
+							<a href="javascript:void (0)" onclick="authorDetail()" class="author" author='{{author}}'>{{author}}</a>
+							》原创，转载请保留出处！
+						</div>
+					</div>
+
+					<div class="SOHUCS">
+						<div id="SOHUCS" sid="{{id}}"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/zh-cn.js"></script>
+
+		<script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js"></script>
+		<script type="text/javascript">
+			let base_url = 'http://sxitw.cn'
+
+
+			function parseDom(str) {
+				let that = this;
+				let obj = document.createElement('div');
+				obj.innerHTML = str;
+				let newStr = '';
+
+				let childNodes = $(obj)[0].childNodes;
+				for (let i = 0; i < childNodes.length; i++) {
+					const strElement = childNodes[i];
+					if (strElement.tagName == 'PRE') {
+						let pre = unescapeHTML($(strElement).html());
+						newStr += '<pre>' + pre + '</pre>';
+					} else {
+						newStr += '<p>' + $(strElement).html() + '</p>';
+					}
+				}
+				return newStr;
+			}
+
+
+			function unescapeHTML(str) {
+				str = str.replace(/&/g, '&amp;');
+				str = str.replace(/&amp;nbsp;/g, ' ');
+				str = str.replace(/</g, '&lt;');
+				str = str.replace(/&amp;gt;/g, '>');
+				str = str.replace(/"/g, '&quot;');
+				str = str.replace(/'/g, '&#039;');
+				return str;
+			}
+
+			function html_entity_decode(str) {
+				str = str.replace(/fuwenben963/g, '');
+				str = str.replace(/&amp;/g, '&');
+				str = str.replace(/&lt;/g, '<');
+				str = str.replace(/&gt;/g, '>');
+				str = str.replace(/&quot;/g, '');
+				str = str.replace(/&#039;/g, "'");
+				return str;
+			}
+
+
+
+
+
+			$.ajax({
+				url: `http://106.52.232.16:8000/api/blog/detail?id={{id}}`,
+				type: 'get',
+				success: function(res) {
+					$('.createtime').text(new moment(res.data.createtime).format('YYYY-MM-DD HH:mm:ss'));
+					$('.url').text(window.location.href);
+					$('.url').attr('href', window.location.href);
+					$('#ae_bdcx').attr('href', 'http://zhanzhang.baidu.com/sitesubmit/index?sitename=' + window.location.href);
+					res.data.content = html_entity_decode(res.data.content);
+					res.data.content = parseDom(res.data.content);
+					$('#content').html(res.data.content);
+
+
+					window.changyan.api.config({
+						appid: 'cysWFxvAX',
+						conf: 'prod_02e199e651f0597818eb703cd2db9ebe'
+					});
+
+				}
+			})
+
+			function toClassDetail() {
+				let value = $('#label').attr('value');
+				let label = $('#label').attr('label');
+				window.location.href = base_url + `/classifyDetail?value=${value}&label=${label}`
+			}
+
+			function authorDetail() {
+				let author = $('.author').attr('author');
+				window.location.href = base_url + `/author?author=${author}`
+			}
+
+			function toHome() {
+				window.location.href = base_url;
+			}
+		</script>
+	</body>
+
+</html>
