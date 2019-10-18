@@ -28,7 +28,6 @@ const getList = async (author, keyword, classify, page, total) => {
 	if (page) {
 		sql += ` LIMIT ${page},${total};`
 	}
-	console.log(sql)
 
 	return await exec(sql);
 };
@@ -57,6 +56,18 @@ const getListCount = async (author, keyword) => {
 		return row[0];
 	})
 };
+
+
+const getListIds = async () => {
+	let sql = ` SELECT id FROM blogs `
+	return await exec(sql).then(row => {
+		let ids = []
+		for (var i = 0; i < row.length; i++) {
+			ids.push(row[i].id)
+		}
+		return ids;
+	});
+}
 
 
 /**
@@ -94,7 +105,7 @@ const getClassify = async (classify, keyword, page, total) => {
 const getClassifyCount = async (classify, keyword, page, total) => {
 
 	let sql = ` select count(id) from blogs a , classify b where 1=1 `;
-	
+
 	if (keyword) {
 		sql += `and a.title like '%${keyword}%' `
 	}
@@ -202,6 +213,7 @@ const delBlog = async (id, author) => {
 module.exports = {
 	getList,
 	getListCount,
+	getListIds,
 	getClassify,
 	getClassifyCount,
 	getDetail,
