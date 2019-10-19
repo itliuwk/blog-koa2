@@ -23,6 +23,7 @@ const Register = async (username, password, realname) => {
 	username = escape(username);
 	password = escape(password);
 	realname = escape(realname);
+	let createdate = Date.now();
 	let dUsername = username.replace(/\'/g, "");
 
 	const userSql = ` select * from users where username like '%${dUsername}%'`;
@@ -31,7 +32,7 @@ const Register = async (username, password, realname) => {
 	const user = await exec(userSql);
 
 	if (user.length === 0) {
-		const sql = ` insert into users(username,password,realname) values(${username},${password},${realname}); `;
+		const sql = ` insert into users(username,password,realname,createdate) values(${username},${password},${realname},${createdate}) `;
 		const insert = await exec(sql);
 
 		if (insert.affectedRows > 0) {

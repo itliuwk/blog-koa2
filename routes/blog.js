@@ -133,7 +133,7 @@ router.get('/detailTurnHtml', async function(ctx, next) {
 					res.content = html_entity_decode(res.content);
 					var ret = template.render(data.toString(), res)
 					//  会在当前目录下创建article 目录 并创建detail_[i] 文件 并写入ret中的内容
-					writeFileRecursive(`./public/detail_${ids[i]}.html`, ret, (err) => {
+					writeFileRecursive(`../../sxitw.cn/detail_${ids[i]}.html`, ret, (err) => {
 						if (err) console.error(err);
 						console.info("write success");
 						ctx.body = new SuccessModel(ids[i])
