@@ -5,7 +5,7 @@ const {
 
 const login = async (username, password) => {
 
-	//防SQL 注入
+	//防SQL 注入 
 	username = escape(username);
 	password = escape(password);
 	let logintime = Date.now();
