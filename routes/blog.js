@@ -145,4 +145,24 @@ router.get('/detailTurnHtml', async function(ctx, next) {
 	});
 });
 
+
+
+router.get('/detailHtml', async function(ctx, next) {
+	fs.readFile('./article/detail.html', function(err, data) {
+		if (err) {
+			return console.log('读取文件失败了')
+		}
+		getDetail(ctx.query.id).then(res => {
+			res.content = html_entity_decode(res.content);
+			var ret = template.render(data.toString(), res)
+			//  会在当前目录下创建article 目录 并创建detail_[i] 文件 并写入ret中的内容
+			//  ../../sxitw.cn  是线上前端目录的路径，生成的html 放在前端项目文件里
+			writeFileRecursive(`../../sxitw.cn/detail_${ctx.query.id}.html`, ret, (err) => {
+				if (err) console.error(err);
+				ctx.body = new SuccessModel("write success")
+			});
+		});
+	});
+});
+
 module.exports = router;
