@@ -13,9 +13,9 @@ if (env === 'dev') {
     // };
 
     MYSQL_CONF = {
-        host: '', // 数据库地址
-        user: 'myblog', // 数据库名
-        password: '',   // 数据库密码
+        host: '106.52.232.16',
+        user: 'myblog',
+        password: '101207302das',
         port: '3306',
         database: 'myblog'
     };
@@ -40,9 +40,9 @@ if (env === 'production') {
 
     // 腾讯云
     MYSQL_CONF = {
-        host: '', // 数据库地址
-        user: 'myblog', // 数据库名
-        password: '',   // 数据库密码
+        host: '106.52.232.16',
+        user: 'myblog',
+        password: '101207302das',
         port: '3306',
         database: 'myblog'
     };
