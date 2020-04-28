@@ -33,6 +33,7 @@ const mailList = require('./routes/mailList')
 const friends = require('./routes/friends')
 const statistics = require('./routes/statistics')
 const uploadfiles = require('./routes/uploadfiles')
+const upload = require('./routes/upload')
 
 const {REDIS_CONF} = require('./conf/db');
 
@@ -97,6 +98,7 @@ app.use(mailList.routes(), mailList.allowedMethods())
 app.use(friends.routes(), friends.allowedMethods())
 app.use(statistics.routes(), statistics.allowedMethods())
 app.use(uploadfiles.routes(), uploadfiles.allowedMethods())
+app.use(upload.routes(), upload.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {
