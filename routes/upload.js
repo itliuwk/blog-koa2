@@ -18,6 +18,7 @@ let mac = new qiniu.auth.digest.Mac(accessKey, secretKey);
 
 let options = {
     scope: bucket,
+    deadline:'1457843866'
 };
 let putPolicy = new qiniu.rs.PutPolicy(options);
 let uploadToken = putPolicy.uploadToken(mac);
