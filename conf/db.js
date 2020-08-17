@@ -13,7 +13,7 @@ if (env === 'dev') {
     // };
 
     MYSQL_CONF = {
-        host: '106.52.232.16',
+        host: '106.52.xx.xx',
         user: 'myblog',
         password: '101207302das',
         port: '3306',
@@ -40,7 +40,7 @@ if (env === 'production') {
 
     // 腾讯云
     MYSQL_CONF = {
-        host: '106.52.232.16',
+             host: '106.52.xx.xx',
         user: 'myblog',
         password: '101207302das',
         port: '3306',
