@@ -28,7 +28,7 @@
     "koa2-cors": "^2.0.6",
     "mysql": "^2.17.1",
     "pug": "^2.0.3",
-    "redis": "^2.8.0",
+    "redis": "^3.1.1",
     "xxs": "0.0.1"
   },
   "devDependencies": {
