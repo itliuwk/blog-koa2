@@ -12,6 +12,7 @@
     "art-template": "^4.13.2",
     "cross-env": "^5.2.0",
     "debug": "^4.1.1",
+    "qiniu": "^7.3.2",
     "koa": "^2.7.0",
     "koa-body": "^4.1.1",
     "koa-bodyparser": "^4.2.1",
